@@ -22,6 +22,16 @@ Or regenerate profiling info:
 | keccak     |    0:07.57    |   40.40s  |     0.94s   |     545%  |    2.30GB   |
 | keccak_2x  |    0:15.00    |   79.91s  |     1.75s   |     544%  |    4.32GB   |
 
+### Verification times (nargo M1 Max)
+
+| Package    | Elapsed Time | User Time | System Time | CPU Usage | Max Memory |
+|------------|--------------|-----------|-------------|-----------|------------|
+| poseidon   |    0:00.61    |     0.86  |      0.14   |     165%  |  143.35MB   |
+| rlp        |    0:01.19    |     3.57  |      0.18   |     316%  |  244.38MB   |
+| keccak     |    0:06.66    |    39.96  |      0.60   |     609%  |    1.80GB   |
+| keccak_2x  |    0:12.39    |    76.51  |      1.15   |     626%  |    3.50GB   |
+
+
 
 ### Circuit sizes
 
