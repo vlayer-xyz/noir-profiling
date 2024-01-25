@@ -50,6 +50,6 @@ echo "|---------|------|--------|--------------|-----------|-------------|------
 for package in "${packages[@]}"; do
     profile_command "$package" "nargo" "prove" "nargo prove --package=${package}"
     profile_command "$package" "nargo" "verify" "nargo verify --package=${package}"
-    profile_command "$package" "yarn" "prove" "yarn start --package=${package} --action=prove"
-    profile_command "$package" "yarn" "verify" "yarn start --package=${package} --action=verify"
+    profile_command "$package" "noir_js" "prove" "yarn start --package=${package} --action=prove"
+    profile_command "$package" "noir_js" "verify" "yarn start --package=${package} --action=verify"
 done
