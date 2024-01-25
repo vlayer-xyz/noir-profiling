@@ -12,6 +12,10 @@
     "typescript": "^5.3.3",
     "yargs": "^17.7.2"
   },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
   "type": "module",
   "license": "MIT",
   "devDependencies": {
