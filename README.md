@@ -1,37 +1,41 @@
 # noir-profiling
 
 ## Working on this project
+
 You can print the number of opcodes in all circuits:
+
 ```
 nargo info --workspace
 ```
 
 Or regenerate profiling info:
+
 ```
-./prove.sh
+./profile.sh
 ```
 
 ## Results
 
-### Proving times (nargo, M1 Max)
+### Profiling results (local M1 Max)
 
-| Package    | Elapsed Time | User Time | System Time | CPU Usage | Max Memory |
-|------------|--------------|-----------|-------------|-----------|------------|
-| poseidon   |    0:00.64    |    1.17s  |     0.19s   |     211%  |  148.99MB   |
-| rlp        |    0:01.20    |    0.92s  |     0.03s   |      79%  |   96.17MB   |
-| keccak     |    0:07.57    |   40.40s  |     0.94s   |     545%  |    2.30GB   |
-| keccak_2x  |    0:15.00    |   79.91s  |     1.75s   |     544%  |    4.32GB   |
-
-### Verification times (nargo M1 Max)
-
-| Package    | Elapsed Time | User Time | System Time | CPU Usage | Max Memory |
-|------------|--------------|-----------|-------------|-----------|------------|
-| poseidon   |    0:00.61    |     0.86  |      0.14   |     165%  |  143.35MB   |
-| rlp        |    0:01.19    |     3.57  |      0.18   |     316%  |  244.38MB   |
-| keccak     |    0:06.66    |    39.96  |      0.60   |     609%  |    1.80GB   |
-| keccak_2x  |    0:12.39    |    76.51  |      1.15   |     626%  |    3.50GB   |
-
-
+| Package   | Tool  | Action | Elapsed Time | User Time | System Time | CPU Usage | Max Memory |
+| --------- | ----- | ------ | ------------ | --------- | ----------- | --------- | ---------- |
+| poseidon  | nargo | prove  | 0:00.67      | 1.16      | 0.17        | 198%      | 149.46MB   |
+|           |       | verify | 0:00.64      | 0.89      | 0.12        | 159%      | 143.59MB   |
+|           | yarn  | prove  | 0:01.62      | 3.67      | 0.66        | 266%      | 2.18GB     |
+|           |       | verify | 0:01.28      | 3.30      | 0.55        | 299%      | 2.13GB     |
+| rlp       | nargo | prove  | 0:01.28      | 3.74      | 0.25        | 310%      | 313.48MB   |
+|           |       | verify | 0:01.27      | 3.70      | 0.15        | 303%      | 244.93MB   |
+|           | yarn  | prove  | 0:02.61      | 9.90      | 0.72        | 406%      | 2.24GB     |
+|           |       | verify | 0:02.48      | 9.25      | 0.59        | 396%      | 2.36GB     |
+| keccak    | nargo | prove  | 0:07.41      | 40.26     | 0.96        | 555%      | 2.29GB     |
+|           |       | verify | 0:06.62      | 39.98     | 0.62        | 613%      | 1.79GB     |
+|           | yarn  | prove  | 0:21.50      | 107.59    | 2.00        | 509%      | 4.07GB     |
+|           |       | verify | 0:18.11      | 95.84     | 1.04        | 534%      | 3.65GB     |
+| keccak_2x | nargo | prove  | 0:14.52      | 79.77     | 1.83        | 561%      | 4.31GB     |
+|           |       | verify | 0:12.44      | 76.64     | 1.24        | 626%      | 3.57GB     |
+|           | yarn  | prove  | 0:42.05      | 213.33    | 3.54        | 515%      | 6.06GB     |
+|           |       | verify | 0:32.77      | 184.67    | 1.52        | 568%      | 5.11GB     |
 
 ### Circuit sizes
 
