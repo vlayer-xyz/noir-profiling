@@ -1,0 +1,7 @@
+{
+  "name": "noir-profiling",
+  "version": "0.0.1",
+  "repository": "https://github.com/vlayer-xyz/noir-profiling.git",
+  "packageManager": "yarn@4.0.2",
+  "license": "MIT"
+}
