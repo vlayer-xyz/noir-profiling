@@ -1,10 +1,10 @@
-name: circuit tests
+name: circuits profiling
 
 on: [push]
 
 jobs:
   test:
-    name: nargo test
+    name: circuits profiling
     runs-on: ubuntu-latest
 
     steps:
@@ -16,5 +16,5 @@ jobs:
         with:
           toolchain: nightly-2024-01-11 # Pin at 0.23.0 when it's released. We need nightly now as 0.22.0 doesn't have the oracles
 
-      - name: Run nargo test
-        run: nargo test --workspace
+      - name: Run nargo info
+        run: nargo info --workspace
