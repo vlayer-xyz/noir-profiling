@@ -1,0 +1,26 @@
+{
+  "name": "noir-profiling",
+  "version": "0.0.1",
+  "repository": "https://github.com/vlayer-xyz/noir-profiling.git",
+  "packageManager": "yarn@4.0.2",
+  "dependencies": {
+    "@noir-lang/backend_barretenberg": "0.22.0-179c90d.nightly",
+    "@noir-lang/noir_js": "0.22.0-179c90d.nightly",
+    "@noir-lang/noirc_abi": "^0.22.0-179c90d.nightly",
+    "toml": "^3.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "yargs": "^17.7.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "type": "module",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.6",
+    "@types/yargs": "^17.0.32",
+    "prettier": "^3.2.4"
+  }
+}

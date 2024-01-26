@@ -20,23 +20,36 @@ convert_memory() {
     fi
 }
 
-echo "| Package | Elapsed Time | User Time | System Time | CPU Usage | Max Memory |"
-echo "|---------|--------------|-----------|-------------|-----------|------------|"
+profile_command() {
+    local package=$1
+    local tool=$2
+    local action=$3
+    local command=$4
 
-for package in "${packages[@]}"; do
     temp_file=$(mktemp)
-    gtime -f "$TIME_FORMAT" nargo prove --package="${package}" > "$temp_file" 2>&1
+    gtime -f "$TIME_FORMAT" bash -c "$command" > "$temp_file" 2>&1
     output=$(<"$temp_file")
 
     elapsed_time=$(echo "$output" | grep 'Elapsed Time' | awk '{print $3}')
-
     user_time=$(echo "$output" | grep 'User Time' | awk '{print $3 " " $4}')
     system_time=$(echo "$output" | grep 'System Time' | awk '{print $3 " " $4}')
     cpu_usage=$(echo "$output" | grep 'CPU Usage' | awk '{print $3}')
     max_memory_kb=$(echo "$output" | grep 'Max Memory' | awk '{print $3}')
     max_memory=$(convert_memory "$max_memory_kb")
 
-    echo "| $package | $elapsed_time | $user_time | $system_time | $cpu_usage | $max_memory |"
+    echo "| $package | $tool | $action | $elapsed_time | $user_time | $system_time | $cpu_usage | $max_memory |"
 
     rm "$temp_file"
+}
+
+yarn build
+
+echo "| Package | Tool | Action | Elapsed Time | User Time | System Time | CPU Usage | Max Memory |"
+echo "|---------|------|--------|--------------|-----------|-------------|-----------|------------|"
+
+for package in "${packages[@]}"; do
+    profile_command "$package" "nargo" "prove" "nargo prove --package=${package}"
+    profile_command "$package" "nargo" "verify" "nargo verify --package=${package}"
+    profile_command "$package" "noir_js" "prove" "yarn start --package=${package} --action=prove"
+    profile_command "$package" "noir_js" "verify" "yarn start --package=${package} --action=verify"
 done
