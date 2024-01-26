@@ -13,7 +13,7 @@
     "yargs": "^17.7.2"
   },
   "scripts": {
-    "temp": "tsx src/temp.ts",
+    "recursive": "tsx src/recursive.ts",
     "build": "tsc",
     "start": "node dist/index.js"
   },
