@@ -19,33 +19,33 @@ const poseidonProofVerification = await poseidon.bb.verifyIntermediateProof(pose
 assert(poseidonProofVerification, "Poseidon proof verification failed");
 console.timeEnd("poseidon.bb.verifyIntermediateProof");
 
-console.time("generateIntermediateProofArtifacts");
+console.time("poseidon.bb.generateIntermediateProofArtifacts");
 const numPublicInputs = 1;
 const { proofAsFields, vkAsFields, vkHash } = await poseidon.bb.generateIntermediateProofArtifacts(
   poseidonProof,
   numPublicInputs,
 );
-console.timeEnd("generateIntermediateProofArtifacts");
+console.timeEnd("poseidon.bb.generateIntermediateProofArtifacts");
 
 await poseidon.noir.destroy();
 
 // RECURSIVE PROOF
-const recursivePoseidon = await initCircuit("recursive_poseidon");
+const recursive = await initCircuit("recursive");
 const recursionInputs: InputMap = {
   verification_key: vkAsFields,
   proof: proofAsFields,
   public_inputs: [(await readInputMap(packageName)).x as Field],
   key_hash: vkHash,
 };
-const { witness: recursivePoseidonWitness } = await recursivePoseidon.noir.execute(recursionInputs);
+const { witness: recursiveWitness } = await recursive.noir.execute(recursionInputs);
 
-console.time("recursivePoseidon.bb.generateFinalProof");
-const recursivePoseidonProof = await recursivePoseidon.bb.generateFinalProof(recursivePoseidonWitness);
-console.timeEnd("recursivePoseidon.bb.generateFinalProof");
+console.time("recursive.bb.generateFinalProof");
+const recursiveProof = await recursive.bb.generateFinalProof(recursiveWitness);
+console.timeEnd("recursive.bb.generateFinalProof");
 
-console.time("recursivePoseidon.bb.verifyFinalProof");
-const recursivePoseidonProofVerification = await recursivePoseidon.bb.verifyFinalProof(recursivePoseidonProof);
-assert(recursivePoseidonProofVerification, "Recursive Poseidon proof verification failed");
-console.timeEnd("recursivePoseidon.bb.verifyFinalProof");
+console.time("recursive.bb.verifyFinalProof");
+const recursiveProofVerification = await recursive.bb.verifyFinalProof(recursiveProof);
+assert(recursiveProofVerification, "Recursive Poseidon proof verification failed");
+console.timeEnd("recursive.bb.verifyFinalProof");
 
-await recursivePoseidon.noir.destroy();
+await recursive.noir.destroy();

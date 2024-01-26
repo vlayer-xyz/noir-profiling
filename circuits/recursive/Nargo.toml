@@ -1,0 +1,3 @@
+[package]
+name = "recursive"
+type = "bin"
