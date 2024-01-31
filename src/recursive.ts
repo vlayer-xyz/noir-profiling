@@ -1,6 +1,5 @@
 import { initCircuit, readInputMap } from "./utils.js";
-import { InputMap } from "@noir-lang/noir_js";
-import { Field } from "@noir-lang/noirc_abi";
+import { Field, type InputMap } from "@noir-lang/noirc_abi";
 import assert from "assert";
 import { prepareIntermediateProofArtefacts } from "./recursive_utils.js";
 
