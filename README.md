@@ -81,3 +81,29 @@ recursive2x.bb.verifyFinalProof: 14.451s
 | recursive_2x | Bounded { width: 3 } | 2            | 500966               |
 +--------------+----------------------+--------------+----------------------+
 ```
+
+### Halo2 keccak benchmark
+Generated using 
+```
+cargo test -- --nocapture packed_multi_keccak_prover
+```
+ in https://github.com/axiom-crypto/halo2-lib with some additional logging. 
+
+| Circuit Degree | Rows Per Round  | Input Bytes | Prove Time | Verify Time |
+| --------- | ------- | ------ | ------------ | --------- | 
+| 16        | 25      | 0      | 40s          | 54ms      |
+| 15        | 25      | 0      | 20.396956041s| 55ms      |
+| 14        | 25      | 0      | 11s          | 88ms      |
+| 13        | 25      | 0      | 8s           | 61ms      |
+| 12        | 25      | 0      | 3.7s         | 62ms      |
+| 11        | 25      | 0      | 2.5s         | 68ms      |
+| 10        | 25      | 0      | FAIL         |           |
+| 10        | 9       | 0      | 3.44s        | 49ms      |
+| 9         | 9       | 0      | 2.89s        | 52ms      |
+| 8         | 9       | 0      | FAIL         |           |
+| 11        | 9       | 1024   | 5.22s        | 43ms      |
+| 10        | 9       | 1024   | FAIL         |           |
+| 13        | 25      | 1024   | 5.96s        | 58ms      |
+| 12        | 25      | 1024   | FAIL         |           |
+| 16        | 25      | 10240  | 34s          | 54ms      |
+| 15        | 25      | 10240  | FAIL         |           |
