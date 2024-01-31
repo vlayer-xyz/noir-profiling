@@ -37,6 +37,31 @@ Or regenerate profiling info:
 |           | noir_js | prove  | 0:42.05      | 213.33    | 3.54        | 515%      | 6.06GB     |
 |           |         | verify | 0:32.77      | 184.67    | 1.52        | 568%      | 5.11GB     |
 
+### Recursive proofs (WASM, local M1 Max)
+
+#### Verifying single poseidon proof
+
+```sh
+poseidon.bb.generateIntermediateProof: 1.447s
+poseidon.bb.verifyIntermediateProof: 239.36ms
+poseidon.bb.generateIntermediateProofArtifacts: 201.236ms
+recursive.bb.generateFinalProof: 24.827s
+recursive.bb.verifyFinalProof: 7.995s
+```
+
+#### Verifying two keccak proofs
+
+```
+keccak.bb.generateIntermediateProof: 21.437s
+keccak.bb.verifyIntermediateProof: 7.665s
+keccak.bb.generateIntermediateProofArtifacts: 7.642s
+keccak.bb.generateIntermediateProof: 19.652s
+keccak.bb.verifyIntermediateProof: 7.607s
+keccak.bb.generateIntermediateProofArtifacts: 7.643s
+recursive2x.bb.generateFinalProof: 48.134s
+recursive2x.bb.verifyFinalProof: 14.451s
+```
+
 ### Circuit sizes
 
 ```
