@@ -83,27 +83,26 @@ recursive2x.bb.verifyFinalProof: 14.451s
 ```
 
 ### Halo2 keccak benchmark
+Every row represents one execution of Keccak prove and verify algorithm implemented 
+in [packed_multi_keccak_prover](https://github.com/vlayer-xyz/halo2-lib/blob/keccak-benchmark/hashes/zkevm/src/keccak/vanilla/tests.rs#L262) test for given circuit degree, rows per round and input bytes.
+
 Generated using 
 ```
-cargo test -- --nocapture packed_multi_keccak_prover
+RUST_TEST_THREADS=1 cargo test -- --nocapture packed_multi_keccak_prover 2>/dev/null | grep "| "
 ```
- in https://github.com/axiom-crypto/halo2-lib with some additional logging. 
+ in https://github.com/vlayer-xyz/halo2-lib/tree/keccak-benchmark. 
 
-| Circuit Degree | Rows Per Round  | Input Bytes | Prove Time | Verify Time |
-| --------- | ------- | ------ | ------------ | --------- | 
-| 16        | 25      | 0      | 40s          | 54ms      |
-| 15        | 25      | 0      | 20.396956041s| 55ms      |
-| 14        | 25      | 0      | 11s          | 88ms      |
-| 13        | 25      | 0      | 8s           | 61ms      |
-| 12        | 25      | 0      | 3.7s         | 62ms      |
-| 11        | 25      | 0      | 2.5s         | 68ms      |
-| 10        | 25      | 0      | FAIL         |           |
-| 10        | 9       | 0      | 3.44s        | 49ms      |
-| 9         | 9       | 0      | 2.89s        | 52ms      |
-| 8         | 9       | 0      | FAIL         |           |
-| 11        | 9       | 1024   | 5.22s        | 43ms      |
-| 10        | 9       | 1024   | FAIL         |           |
-| 13        | 25      | 1024   | 5.96s        | 58ms      |
-| 12        | 25      | 1024   | FAIL         |           |
-| 16        | 25      | 10240  | 34s          | 54ms      |
-| 15        | 25      | 10240  | FAIL         |           |
+| Circuit Degree | Rows Per Round | Input Bytes | Prove Time | Verify Time |
+|----------------|----------------|-------------|------------|-------------| 
+| 9              | 9              | 0           | 3.02s      | 54.42ms     |
+| 10             | 9              | 0           | 3.39s      | 42.85ms     |
+| 11             | 9              | 0           | 7.37s      | 42.97ms     |
+| 11             | 25             | 0           | 2.61s      | 68.12ms     |
+| 12             | 25             | 0           | 3.57s      | 57.75ms     |
+| 13             | 25             | 0           | 6.29s      | 57.14ms     |
+| 11             | 9              | 532         | 5.76s      | 42.88ms     |
+| 12             | 9              | 532         | 8.88s      | 39.22ms     |
+| 12             | 25             | 532         | 3.72s      | 57.90ms     |
+| 13             | 25             | 532         | 9.83s      | 57.21ms     |
+| 15             | 9              | 10000       | 51.59s     | 48.76ms     |
+| 16             | 25             | 10000       | 43.00s     | 56.01ms     |
