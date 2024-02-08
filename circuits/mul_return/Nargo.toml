@@ -1,0 +1,3 @@
+[package]
+name = "mul_return"
+type = "bin"

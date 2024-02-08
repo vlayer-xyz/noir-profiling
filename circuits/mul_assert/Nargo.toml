@@ -1,0 +1,3 @@
+[package]
+name = "mul_assert"
+type = "bin"
