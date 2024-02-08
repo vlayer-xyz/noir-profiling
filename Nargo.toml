@@ -1,10 +1,13 @@
 [workspace]
 members = [
+    "circuits/add_mul",
+    "circuits/loop",
+    "circuits/if",
     "circuits/poseidon",
     "circuits/rlp",
     "circuits/keccak",
     "circuits/keccak_2x",
     "circuits/recursive",
-    "circuits/recursive_2x"
+    "circuits/recursive_2x",
 ]
 default-member = "circuits/keccak"

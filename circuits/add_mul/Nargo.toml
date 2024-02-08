@@ -1,0 +1,3 @@
+[package]
+name = "add_mul"
+type = "bin"
