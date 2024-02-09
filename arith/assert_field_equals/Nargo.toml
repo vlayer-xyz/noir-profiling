@@ -1,0 +1,3 @@
+[package]
+name = "assert_field_equals"
+type = "bin"

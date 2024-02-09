@@ -1,0 +1,3 @@
+[package]
+name = "u2_comparison"
+type = "bin"

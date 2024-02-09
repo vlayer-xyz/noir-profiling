@@ -3,5 +3,5 @@ fn main(x: Field, y: Field) {
     let b = a + 1;
     let c = b * y;
     let d = c * 2 + 3;
-    assert(d == 1);
+    assert(d == 15);
 }

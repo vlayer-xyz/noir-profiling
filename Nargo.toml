@@ -1,10 +1,13 @@
 [workspace]
 members = [
-    "circuits/add_mul",
-    "circuits/mul_return",
-    "circuits/mul_assert",
-    "circuits/loop",
-    "circuits/if",
+    "arith/assert_field_equals",
+    "arith/add_mul",
+    "arith/return",
+    "arith/loop",
+    "arith/if",
+    "arith/u1_comparison",
+    "arith/u2_comparison",
+    "arith/u8_comparison",
     "circuits/poseidon",
     "circuits/rlp",
     "circuits/keccak",

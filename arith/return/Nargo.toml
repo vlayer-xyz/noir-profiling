@@ -1,0 +1,3 @@
+[package]
+name = "return"
+type = "bin"

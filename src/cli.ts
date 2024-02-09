@@ -4,6 +4,7 @@ import { hideBin } from "yargs/helpers";
 export enum Action {
   Verify = "verify",
   Prove = "prove",
+  Gates = "gates",
 }
 
 interface Arguments {

@@ -7,6 +7,7 @@
     "@noir-lang/backend_barretenberg": "0.22.0-179c90d.nightly",
     "@noir-lang/noir_js": "0.22.0-179c90d.nightly",
     "@noir-lang/noirc_abi": "^0.22.0-179c90d.nightly",
+    "algebra.js": "^0.2.6",
     "toml": "^3.0.0",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3",
@@ -21,6 +22,7 @@
   "type": "module",
   "license": "MIT",
   "devDependencies": {
+    "@types/algebra.js": "^0.2.4",
     "@types/node": "^20.11.6",
     "@types/yargs": "^17.0.32",
     "prettier": "^3.2.4"
