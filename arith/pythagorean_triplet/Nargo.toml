@@ -1,0 +1,3 @@
+[package]
+name = "pythagorean_triplet"
+type = "bin"

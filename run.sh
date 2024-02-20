@@ -1,6 +1,8 @@
-packages="assert_field_equals add_mul return loop if"
+# packages="assert_field_equals add_mul return loop if pythagorean_triplet"
 packages="u1_comparison u2_comparison u8_comparison"
 # packages="if"
+# packages="u8_comparison"
+# packages="pythagorean_triplet"
 
 for prog in $packages; do
     echo "Processing package: $prog"

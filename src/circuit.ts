@@ -48,6 +48,7 @@ function parseWitness(input: string) {
 }
 
 function printCircuit(wires: number[][], gates: bigint[][], witness: bigint[]) {
+  // console.log(wires, gates);
   const SELECTOR_COUNT = 11;
   const SELECTOR_NAMES = [
     "q_m",
@@ -86,11 +87,11 @@ function printCircuit(wires: number[][], gates: bigint[][], witness: bigint[]) {
     for (let witness_index = 0; witness_index < witness.length; witness_index++) {
       gateWithWitnessSubstitutions = gateWithWitnessSubstitutions.replace(
         new RegExp(`W\\[${witness_index}\\]`, "g"),
-        witness[witness_index].toString(),
+        fieldToInt(witness[witness_index]).toString(),
       );
     }
     console.log(`Gate ${i}:  ${gate}`);
-    // console.log(`         ${gateWithWitnessSubstitutions}`);
+    console.log(`         ${gateWithWitnessSubstitutions}`);
   }
 }
 
@@ -107,6 +108,7 @@ function fieldToInt(selector: bigint) {
     throw new Error(`Unknown selector value: ${selector}`);
   }
 }
+// 21888242871839275222246405745257275088548364400416034343698204186575808495616
 
 function resolveSelector(selectorName: string, wires: number[]) {
   if (selectorName == "q_m") {
