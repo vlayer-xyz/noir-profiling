@@ -4,9 +4,9 @@
   "repository": "https://github.com/vlayer-xyz/noir-profiling.git",
   "packageManager": "yarn@4.0.2",
   "dependencies": {
-    "@noir-lang/backend_barretenberg": "0.22.0-179c90d.nightly",
-    "@noir-lang/noir_js": "0.22.0-179c90d.nightly",
-    "@noir-lang/noirc_abi": "^0.22.0-179c90d.nightly",
+    "@noir-lang/backend_barretenberg": "0.26.0",
+    "@noir-lang/noir_js": "0.26.0",
+    "@noir-lang/noirc_abi": "0.26.0",
     "toml": "^3.0.0",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3",
