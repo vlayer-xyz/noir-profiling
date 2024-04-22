@@ -32,11 +32,11 @@ const publicInputs = {
 const { witness } = await recursive2x.noir.execute(publicInputs);
 
 console.time("recursive2x.bb.generateFinalProof");
-const proof = await recursive2x.bb.generateFinalProof(witness);
+const proof = await recursive2x.bb.generateProof(witness);
 console.timeEnd("recursive2x.bb.generateFinalProof");
 
 console.time("recursive2x.bb.verifyFinalProof");
-const proofVerification = await recursive2x.bb.verifyFinalProof(proof);
+const proofVerification = await recursive2x.bb.verifyProof(proof);
 assert(proofVerification, "Recursive2x Poseidon proof verification failed");
 console.timeEnd("recursive2x.bb.verifyFinalProof");
 

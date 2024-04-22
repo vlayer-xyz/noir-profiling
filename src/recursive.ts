@@ -17,11 +17,11 @@ const recursionInputs: InputMap = {
 const { witness: recursiveWitness } = await recursive.noir.execute(recursionInputs);
 
 console.time("recursive.bb.generateFinalProof");
-const recursiveProof = await recursive.bb.generateFinalProof(recursiveWitness);
+const recursiveProof = await recursive.bb.generateProof(recursiveWitness);
 console.timeEnd("recursive.bb.generateFinalProof");
 
 console.time("recursive.bb.verifyFinalProof");
-const recursiveProofVerification = await recursive.bb.verifyFinalProof(recursiveProof);
+const recursiveProofVerification = await recursive.bb.verifyProof(recursiveProof);
 assert(recursiveProofVerification, "Recursive Poseidon proof verification failed");
 console.timeEnd("recursive.bb.verifyFinalProof");
 
