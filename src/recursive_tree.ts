@@ -2,11 +2,11 @@ import { initCircuit, readInputMap } from "./utils.js";
 import { InputMap } from "@noir-lang/noir_js";
 import { Field } from "@noir-lang/noirc_abi";
 import assert from "assert";
-import { prepareIntermediateProofArtefacts } from "./recursive_utils.js";
+import { prepareIntermediateProofArtifacts } from "./recursive_utils.js";
 
 const packageName = "keccak";
-const lhsProof = await prepareIntermediateProofArtefacts(packageName);
-const rhsProof = await prepareIntermediateProofArtefacts(packageName);
+const lhsProof = await prepareIntermediateProofArtifacts(packageName);
+const rhsProof = await prepareIntermediateProofArtifacts(packageName);
 
 // RECURSIVE PROOF
 const recursive2x = await initCircuit("recursive_2x");

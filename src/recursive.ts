@@ -1,12 +1,12 @@
 import { initCircuit, readInputMap } from "./utils.js";
 import { Field, type InputMap } from "@noir-lang/noirc_abi";
 import assert from "assert";
-import { prepareIntermediateProofArtefacts } from "./recursive_utils.js";
+import { prepareIntermediateProofArtifacts, prepareIntermediateProofArtifactsUsingNargo } from "./recursive_utils.js";
 
-const packageName = "poseidon";
-const { vkAsFields, proofAsFields, vkHash } = await prepareIntermediateProofArtefacts(packageName);
+const packageName = "keccak";
+const { vkAsFields, proofAsFields, vkHash } = await prepareIntermediateProofArtifactsUsingNargo(packageName);
 
-// RECURSIVE PROOF
+// // RECURSIVE PROOF
 const recursive = await initCircuit("recursive");
 const recursionInputs: InputMap = {
   verification_key: vkAsFields,
@@ -22,7 +22,7 @@ console.timeEnd("recursive.bb.generateFinalProof");
 
 console.time("recursive.bb.verifyFinalProof");
 const recursiveProofVerification = await recursive.bb.verifyProof(recursiveProof);
-assert(recursiveProofVerification, "Recursive Poseidon proof verification failed");
+assert(recursiveProofVerification, `Recursive ${packageName} proof verification failed`);
 console.timeEnd("recursive.bb.verifyFinalProof");
 
 await recursive.noir.destroy();
