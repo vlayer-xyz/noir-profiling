@@ -4,7 +4,8 @@ members = [
     "circuits/rlp",
     "circuits/keccak",
     "circuits/keccak_2x",
+    "circuits/keccak_big",
     "circuits/recursive",
-    "circuits/recursive_2x"
+    "circuits/recursive_2x",
 ]
 default-member = "circuits/keccak"

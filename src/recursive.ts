@@ -3,7 +3,7 @@ import { Field, type InputMap } from "@noir-lang/noirc_abi";
 import assert from "assert";
 import { prepareIntermediateProofArtifacts, prepareIntermediateProofArtifactsUsingNargo } from "./recursive_utils.js";
 
-const packageName = "keccak";
+const packageName = "keccak_big";
 const { vkAsFields, proofAsFields, vkHash } = await prepareIntermediateProofArtifactsUsingNargo(packageName);
 
 // // RECURSIVE PROOF
