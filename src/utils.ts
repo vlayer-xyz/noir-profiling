@@ -38,6 +38,12 @@ export async function readProof(packageName: string): Promise<Uint8Array> {
   return encodeHexString("0x" + proofHex);
 }
 
+export async function readProofHex(packageName: string): Promise<Hex> {
+  const PROOF_PATH = `./proofs/${packageName}.proof`;
+  const proofHex = await fs.readFile(PROOF_PATH, "utf-8");
+  return `0x${proofHex}`;
+}
+
 export async function readWitnessMap(packageName: string, abi: Abi): Promise<WitnessMap> {
   const inputMap = await readInputMap(packageName);
   const witnessMap = abiEncode(abi, inputMap, inputMap["return"]);
@@ -68,4 +74,11 @@ export function isHex(value: unknown, { strict = true }: { strict?: boolean } = 
   if (!value) return false;
   if (typeof value !== "string") return false;
   return strict ? /^0x[0-9a-fA-F]*$/.test(value) : value.startsWith("0x");
+}
+
+export async function withProfiling<T>(name: string, fn: () => Promise<T>): Promise<T> {
+  console.time(name);
+  const result = await fn();
+  console.timeEnd(name);
+  return result;
 }

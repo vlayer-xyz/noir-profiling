@@ -11,11 +11,11 @@ if (argv.action == Action.Verify) {
     proof,
     publicInputs: Array.from(witnessMap.values()),
   };
-  let isCorrect = await noir.verifyFinalProof(proofData);
-  assert(isCorrect, "Proof vefification failed");
+  let isCorrect = await noir.verifyProof(proofData);
+  assert(isCorrect, "Proof verification failed");
 } else if (argv.action == Action.Prove) {
   let inputMap = await readInputMap(argv.package);
-  await noir.generateFinalProof(inputMap);
+  await noir.generateProof(inputMap);
 }
 
 await noir.destroy();

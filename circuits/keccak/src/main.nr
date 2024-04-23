@@ -1,5 +1,6 @@
 use dep::std;
 
+#[recursive]
 fn main(x: pub u8) {
     let array: [u8; 532] = [x; 532];
     let hash = std::hash::keccak256(array, 532);
