@@ -45,16 +45,23 @@ export async function readProofHex(packageName: string): Promise<Hex> {
 }
 
 export async function readWitnessMap(packageName: string, abi: Abi): Promise<WitnessMap> {
-  const inputMap = await readInputMap(packageName);
+  const inputMap = await readAllInputs(packageName);
   const witnessMap = abiEncode(abi, inputMap, inputMap["return"]);
   return witnessMap;
 }
 
-export async function readInputMap(packageName: string): Promise<InputMap> {
+export async function readAllInputs(packageName: string): Promise<InputMap> {
   const PROVER_MAP_PATH = `./circuits/${packageName}/Prover.toml`;
   const verifierData = await fs.readFile(PROVER_MAP_PATH, "utf-8");
-  const inputMap = toml.parse(verifierData);
-  return inputMap;
+  const allInputs = toml.parse(verifierData);
+  return allInputs;
+}
+
+export async function readPublicInputs(packageName: string): Promise<InputMap> {
+  const VERIFIER_MAP_PATH = `./circuits/${packageName}/Verifier.toml`;
+  const verifierData = await fs.readFile(VERIFIER_MAP_PATH, "utf-8");
+  const publicInputs = toml.parse(verifierData);
+  return publicInputs;
 }
 
 export function encodeHexString(value: string): Uint8Array {

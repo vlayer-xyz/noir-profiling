@@ -1,4 +1,4 @@
-import { initCircuit, readInputMap } from "./utils.js";
+import { initCircuit, readAllInputs } from "./utils.js";
 import { InputMap } from "@noir-lang/noir_js";
 import { Field } from "@noir-lang/noirc_abi";
 import assert from "assert";
@@ -10,8 +10,8 @@ const rhsProof = await prepareIntermediateProofArtifacts(packageName);
 
 // RECURSIVE PROOF
 const recursive2x = await initCircuit("recursive_2x");
-const lhsPublicInputs = [(await readInputMap(packageName)).x as Field];
-const rhsPublicInputs = [(await readInputMap(packageName)).x as Field];
+const lhsPublicInputs = [(await readAllInputs(packageName)).x as Field];
+const rhsPublicInputs = [(await readAllInputs(packageName)).x as Field];
 const lhsRecursionInputs: InputMap = {
   verification_key: lhsProof.vkAsFields,
   proof: lhsProof.proofAsFields,
