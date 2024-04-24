@@ -1,5 +1,12 @@
 import assert from "assert";
-import { initCircuit, readInputMap, readProofHex, readWitnessMap } from "./utils.js";
+import {
+  encodePublicInputs,
+  initCircuit,
+  readAllInputs,
+  readProofHex,
+  readPublicInputs,
+  readWitnessMap,
+} from "./utils.js";
 import { readFile, writeFile } from "fs/promises";
 import { Hex, concatHex } from "viem";
 import { CompiledCircuit } from "@noir-lang/noir_js";
@@ -15,7 +22,7 @@ export interface IntermediateProofArtifacts {
 export async function prepareIntermediateProofArtifacts(packageName: string): Promise<IntermediateProofArtifacts> {
   const { bb, noir } = await initCircuit(packageName);
 
-  const inputs = await readInputMap(packageName);
+  const inputs = await readAllInputs(packageName);
   let { witness } = await noir.execute(inputs);
 
   console.time(`${packageName}.bb.generateIntermediateProof`);
@@ -28,7 +35,7 @@ export async function prepareIntermediateProofArtifacts(packageName: string): Pr
   console.timeEnd(`${packageName}.bb.verifyIntermediateProof`);
 
   console.time(`${packageName}.bb.generateIntermediateProofArtifacts`);
-  const numPublicInputs = 1;
+  const numPublicInputs = 32 + 32 + 1;
   const intermediateProofArtifacts = await bb.generateRecursiveProofArtifacts(proof, numPublicInputs);
   console.timeEnd(`${packageName}.bb.generateIntermediateProofArtifacts`);
 
@@ -44,17 +51,17 @@ async function getProofAsFields(
 ): Promise<string[]> {
   const proofHex = await readProofHex(packageName);
 
-  const inputs = await readWitnessMap(packageName, circuit.abi);
-  const inputsHex = concatHex(Array.from(inputs.values()) as Hex[]);
+  const publicInputs = await encodePublicInputs(packageName, circuit.abi);
+  const publicInputsHex = concatHex(publicInputs);
 
-  const proofWithInputsHex = concatHex([inputsHex, proofHex]);
+  const proofWithInputsHex = concatHex([publicInputsHex, proofHex]);
 
   await writeFile(bb.proofWithInputsPath, proofWithInputsHex.substring(2), "hex");
 
   await bb.proofAsFields();
 
   const proofAsFieldsWithInputs = JSON.parse(await readFile(bb.proofAsFieldsPath, "utf8"));
-  return proofAsFieldsWithInputs.slice(inputs.size);
+  return proofAsFieldsWithInputs.slice(publicInputs.length);
 }
 
 export async function prepareIntermediateProofArtifactsUsingNargo(

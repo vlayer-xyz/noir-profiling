@@ -5,6 +5,7 @@ import os from "os";
 
 import { Abi, abiEncode, type InputMap } from "@noir-lang/noirc_abi";
 import { BarretenbergBackend } from "@noir-lang/backend_barretenberg";
+import { filterPublic } from "./abi.js";
 
 interface CircuitData {
   noir: Noir;
@@ -88,4 +89,12 @@ export async function withProfiling<T>(name: string, fn: () => Promise<T>): Prom
   const result = await fn();
   console.timeEnd(name);
   return result;
+}
+
+export async function encodePublicInputs(packageName: string, abi: Abi): Promise<Hex[]> {
+  const publicInputs = await readPublicInputs(packageName);
+  const publicInputsAbi = filterPublic(abi);
+  const publicInputsEncodedMap = abiEncode(publicInputsAbi, publicInputs, publicInputs["return"]);
+  const publicInputsEncoded = Array.from(publicInputsEncodedMap.values());
+  return publicInputsEncoded as Hex[];
 }
