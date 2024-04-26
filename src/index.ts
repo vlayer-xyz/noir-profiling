@@ -1,4 +1,4 @@
-import { readInputMap, readProof, readWitnessMap, initCircuit } from "./utils.js";
+import { readAllInputs, readProof, readWitnessMap, initCircuit } from "./utils.js";
 import assert from "assert";
 import { Action, argv } from "./cli.js";
 
@@ -14,7 +14,7 @@ if (argv.action == Action.Verify) {
   let isCorrect = await noir.verifyProof(proofData);
   assert(isCorrect, "Proof verification failed");
 } else if (argv.action == Action.Prove) {
-  let inputMap = await readInputMap(argv.package);
+  let inputMap = await readAllInputs(argv.package);
   await noir.generateProof(inputMap);
 }
 

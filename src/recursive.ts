@@ -1,17 +1,20 @@
-import { initCircuit, readInputMap } from "./utils.js";
-import { Field, type InputMap } from "@noir-lang/noirc_abi";
+import { encodePublicInputs, initCircuit, readCircuit } from "./utils.js";
+import { type InputMap } from "@noir-lang/noirc_abi";
 import assert from "assert";
 import { prepareIntermediateProofArtifacts, prepareIntermediateProofArtifactsUsingNargo } from "./recursive_utils.js";
 
-const packageName = "keccak_big";
+const packageName = "keccak";
+const keccakCircuit = await readCircuit(packageName);
 const { vkAsFields, proofAsFields, vkHash } = await prepareIntermediateProofArtifactsUsingNargo(packageName);
+
+const publicInputs = await encodePublicInputs(packageName, keccakCircuit.abi);
 
 // // RECURSIVE PROOF
 const recursive = await initCircuit("recursive");
 const recursionInputs: InputMap = {
   verification_key: vkAsFields,
   proof: proofAsFields,
-  public_inputs: [(await readInputMap(packageName)).x as Field],
+  public_inputs: publicInputs,
   key_hash: vkHash,
 };
 const { witness: recursiveWitness } = await recursive.noir.execute(recursionInputs);
